@@ -1,7 +1,13 @@
 {
-  "name": "lumosbd",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
+	"name": "lumosbd",
+	"integrations": {
+		"cordova": {}
+	},
+	"type": "angular",
+	"proxies": [
+		{
+			"path": "/v1",
+			"proxyUrl": "http://api.lumosbd.com/v1"
+		}
+	]
 }
