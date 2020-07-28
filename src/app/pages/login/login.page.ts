@@ -105,6 +105,10 @@ export class LoginPage implements OnInit {
 		if (this.validateInputs()) {
 			// this.toastService.presentToast('entered'); //to this is ok
 			this.authService.login(this.postData).subscribe((res: any) => {
+				if (res.json().error == true ) {
+					console.log('oops');
+				}
+				
 				this.toastService.presentToast('res');// + JSON.stringify(res));
 				this.openDashboard();
 				// if (res.user) {
