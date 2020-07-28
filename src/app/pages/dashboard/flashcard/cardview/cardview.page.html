@@ -1,0 +1,173 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>cardview</ion-title>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-header>
+
+	<ion-toolbar color="dark">
+		<ion-buttons slot="start">
+		  <ion-menu-button autoHide="false"></ion-menu-button>	  
+    </ion-buttons>
+   
+      
+      <ion-buttons slot="primary">
+        <a class="prev-btn" href="javascript: history.go(-1)"><i class="fas fa-arrow-left"></i></a>
+      </ion-buttons>
+
+<!--
+		<ion-buttons slot="secondary">
+			  <ion-icon slot="start" name="contact"></ion-icon>
+		  </ion-buttons>
+
+		  <ion-buttons slot="primary">
+		
+			  <ion-icon slot="end" name="help-circle"></ion-icon>
+			
+		  </ion-buttons>
+		-->
+
+
+		<ion-title>	
+			<div class="app-header-logo">
+			<img class="logo" src="./assets/img/logo.png" alt="">
+		</div>
+	</ion-title>
+	  </ion-toolbar>
+	  
+	  
+
+	<!--<ion-toolbar color="dark">
+	  <ion-buttons slot="start">
+		<ion-menu-button></ion-menu-button>
+	  </ion-buttons>
+	  <ion-title>
+		<div class="app-header-logo">
+			<img class="logo" src="./assets/img/logo.png" alt="">
+		</div>
+	
+	  </ion-title>
+	</ion-toolbar>
+-->
+  </ion-header>
+
+
+  
+
+<ion-content>
+
+  
+        <div class="app-body" style="margin-top: 0px;">
+            <div class="sub-categories-header">
+                <h5>Flash Card</h5>
+              
+            </div>
+            <div id="number_sec" class="number" style="display: block;">
+              <span>1</span>/3
+            </div>
+            <div class="progress mb-3">                    
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3" style="width: 25%"></div>
+              </div>
+
+            <div id="flashcard-slider" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-step="1">
+                    <div class="bookmark_icon">
+                      <a href="#" class=""><span><i class="fas fa-star"></i></span></a>
+                    </div> 
+                    <div class="flip">                           
+                      <div class="card">   
+                          <div class="face front">                                 
+                            <div class="flip_content_center">
+                              <h3>What is Lorem Ipsum?</h3>
+                              <p>From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage.</p>
+                            </div>
+                             
+                          </div> 
+                          <div class="face back"> 
+                            <div class="flip_content_center">
+                              <h3>What is Lorem Ipsum? Back</h3>
+                              <p>From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage.</p>
+                            </div>
+                          </div> 
+                      </div> 
+                  </div> 
+                  </div>
+                  <div class="carousel-item" data-step="2">   
+                    <div class="bookmark_icon">
+                      <a href="#" class=""><span><i class="fas fa-star"></i></span></a>
+                    </div>                     
+                    <div class="flip"> 
+                      <div class="card"> 
+                          <div class="face front"> 
+                            <div class="flip_content_center">
+                              <h3>What is Lorem Ipsum? 2</h3>
+                              <p>From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage.</p>
+                            </div>
+                          </div> 
+                          <div class="face back">
+                            <div class="flip_content_center">
+                              <h3>What is Lorem Ipsum? Back 2</h3>
+                              <p>From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage.</p>
+                            </div>
+                          </div> 
+                      </div> 
+                  </div> 
+                  </div>
+                  <div class="carousel-item" data-step="3">
+                    <div class="bookmark_icon">
+                      <a href="#" class=""><span><i class="fas fa-star"></i></span></a>
+                    </div> 
+                    <div class="flip"> 
+                      <div class="card"> 
+                          <div class="face front"> 
+                            <div class="flip_content_center">
+                              <h3>What is Lorem Ipsum? 3</h3>
+                              <p>From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage.</p>
+                            </div>
+                          </div> 
+                          <div class="face back"> 
+                            <div class="flip_content_center">
+                              <h3>What is Lorem Ipsum? Back 3</h3>
+                              <p>From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage.</p>
+                            </div>
+                          </div> 
+                      </div> 
+                  </div> 
+                  </div>
+                </div>
+                <div class="flashcard_slider_indicator">
+                  <div class="flashcard_slider_indicator_top">
+                    <span>Click card to see term</span><span><i class="far fa-hand-point-up"></i></span>
+                  </div>
+                  <div class="flashcard_slider_indicator_bottom">
+                    <a class="flashcard-slider-prev" href="#flashcard-slider" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="flashcard-slider-next2" href="#flashcard-slider" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>                      
+                </div>                    
+              </div>
+
+        </div>
+
+       
+
+       
+        <script>
+       
+          $(".flip").click(function(){
+            alert("The paragraph was clicked.");
+        
+        });
+        </script>
+
+
+</ion-content>
+
+

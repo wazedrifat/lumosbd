@@ -1,0 +1,7 @@
+{
+  "name": "lumosbd",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

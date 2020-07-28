@@ -1,0 +1,99 @@
+<ion-header>
+
+	<ion-toolbar color="dark">
+		<ion-buttons slot="start">
+		  <ion-menu-button autoHide="false"></ion-menu-button>	  
+		</ion-buttons>
+
+		<ion-buttons slot="secondary">
+			  <ion-icon slot="start" name="contact"></ion-icon>
+		  </ion-buttons>
+
+		  <ion-buttons slot="primary">
+		
+			  <ion-icon slot="end" name="help-circle"></ion-icon>
+			
+		  </ion-buttons>
+		
+
+
+		<ion-title>	
+			<div class="app-header-logo">
+			<img class="logo" src="./assets/img/logo.png" alt="">
+		</div>
+	</ion-title>
+	  </ion-toolbar>
+	  
+	  
+
+	<!--<ion-toolbar color="dark">
+	  <ion-buttons slot="start">
+		<ion-menu-button></ion-menu-button>
+	  </ion-buttons>
+	  <ion-title>
+		<div class="app-header-logo">
+			<img class="logo" src="./assets/img/logo.png" alt="">
+		</div>
+	
+	  </ion-title>
+	</ion-toolbar>
+-->
+  </ion-header>
+
+
+<ion-content>
+
+<div class="app-body" style="margin-top: 0px;">
+				<div class="app-dashboard-items">
+					<ul>
+						<li class="orange">
+							<a (click)="openNotes()" href="JavaScript:Void(0);">
+								<span><img src="assets/img/writing.png" alt=""></span>
+								<span class="title">Notes</span>
+							</a>
+						</li>
+						<li class="sky_blue">
+							<a (click)="openFlashcards()" href="JavaScript:Void(0);">
+								<span><img src="assets/img/flashcard.png" alt=""></span>
+								<span class="title">Flashcards</span>
+							</a>
+						</li>
+						<li class="green">
+							<a (click)="openSelfAssessment()" href="JavaScript:Void(0);">
+								<span><img src="assets/img/checklist.png" alt=""></span>
+								<span class="title">Self-Assessment</span>
+							</a>
+						</li>
+						<li class="purple">
+							<a (click)="openWeeklyExams()" href="JavaScript:Void(0);">
+								<span><img src="assets/img/test.png" alt=""></span>
+								<span class="title">Weekly Exams</span>
+							</a>
+						</li>
+						<li class="orange_dark">
+							<a (click)="openMyContents()" href="JavaScript:Void(0);">
+								<span><img src="assets/img/content-writing.png" alt=""></span>
+								<span class="title">My Contents</span>
+							</a>
+						</li>
+						<li class="blue">
+							<a (click)="openMyStats()" href="JavaScript:Void(0);">
+								<span><img src="assets/img/graph.png" alt=""></span>
+								<span class="title">My Stats</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="app-dashboard-leaderboard">
+					<ul>
+						<li><a (click)="openLeaderboard()" href="JavaScript:Void(0);">Leaderboard Item</a></li>
+					</ul>
+				</div>
+
+
+			
+			
+			</div>
+
+
+</ion-content>

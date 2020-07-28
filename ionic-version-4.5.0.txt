@@ -1,0 +1,5 @@
+cordova -v 9.0.0 (cordova-lib@9.0.1)
+
+npm v- 6.13.4
+
+node v - v12.14.1
