@@ -52,72 +52,24 @@ export class LoginPage implements OnInit {
 		this.router.navigate(['dashboard']);
 	}
 
-// 	login() {
-
-//         var data1 = 'user_name=' + encodeURIComponent(this.postData.user_name) +
-//                    '&password=' + encodeURIComponent(this.postData.password);
-
-//         var link = environment.apiUrl + 'auth/login';
-
-//         var headers = new Headers();
-//         headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
-//         let options = new RequestOptions({ headers: headers });
-
-//         if(this.username == ''){
-
-//           this.showToast('Enter username');
-
-//         }else if(this.password == ''){
-
-//           this.showToast('Enter password');
-
-//         }else{
-
-//           this.http.post(link, data1, options)
-//           .subscribe(data => {
-
-              
-
-
-//               if(data.json().error == true){
-
-//                 console.log(data.json().message);
-//               }else if(data.json().error == false){
-
-//                 this.showToast(data.json().message);
-//                 console.log(data.json());
-//                 this.navCtrl.setRoot(DashboardPage);
-//                 this.storage.set('token', data.json().token);
-//                 this.storage.set('user_name', data.json().user.name);
-//               }              
-              
-//           }, error => {
-//               console.log("Oooops!");
-//           });
-//         }
-                
-//   }
-
 	loginAction() {
-		//JSON.stringify
+
 		console.log('postData' + JSON.stringify(this.postData));
-		// this.router.navigate(['dashboard']);
 
 		if (this.validateInputs()) {
 
-			// this.toastService.presentToast('entered'); //to this is ok
 			this.authService.login(this.postData).subscribe((res: any) => {
+				// this.toastService.presentToast('res');
+				// this.openDashboard();
+				console.log(JSON.stringify(res));
 
-				this.toastService.presentToast('res');// + JSON.stringify(res));
-				this.openDashboard();
-				
-				// if (res.user) {
-				// 	// this.storageService.store(AuthConstants.AUTH, res.userData);
-				// 	this.openDashboard();
-				// }
-				// else {
-				// 	this.toastService.presentToast('Incorrect username or password');
-				// }
+				if (res.user) {
+					this.storageService.store(AuthConstants.AUTH, res.userData);
+					this.openDashboard();
+				}
+				else {
+					this.toastService.presentToast('Incorrect username or password');
+				}
 			}),
 			(error: any) => {
 				this.toastService.presentToast('Connection Error');

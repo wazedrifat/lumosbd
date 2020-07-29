@@ -1,0 +1,36 @@
+<ion-header>
+
+	<ion-toolbar color="dark">
+		<ion-buttons slot="start">
+		  <ion-menu-button autoHide="false"></ion-menu-button>	  
+    </ion-buttons>
+   
+      <ion-buttons slot="primary">
+        <a class="prev-btn" href="javascript: history.go(-1)"><i class="fas fa-arrow-left"></i></a>
+      </ion-buttons>
+		<ion-title>	
+			<div class="app-header-logo">
+			<img class="logo" src="./assets/img/logo.png" alt="">
+		</div>
+	</ion-title>
+	  </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+   
+
+    <div class="app-body" style="margin-top: 0px;">
+      <div class="header_title">
+        <h4>My Contents</h4>
+      </div>
+     <div class="button_group">
+       <a class="small_button" (click)="openNotes()" href="JavaScript:Void(0);">Notes</a>
+       <a class="small_button" (click)="openQuestions()" href="JavaScript:Void(0);">Question</a>
+     </div>
+    </div>
+    
+
+
+
+</ion-content>
