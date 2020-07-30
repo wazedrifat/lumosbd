@@ -8,8 +8,10 @@ import { environment } from '../../environments/environment';
 })
 
 export class HttpService {
-	headers = new HttpHeaders();
-	options = {headers: this.headers, withCredintials: true};
+	headers = new HttpHeaders({
+		// 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTQzMTQzNDMsImV4cCI6MTU5OTY3MTE0MywianRpIjoiNmRXNTcxQWw5dXdONThabHB6S0huMSIsInVzZXIiOnsibmFtZSI6ImZhcmlkMiIsImlkIjoxNn19.D2o_TukHPvgU_r10KK9S9V4UEwfWJbAkpDt8Ge1AKTg'
+	});
+	options = {headers: this.headers, withCredintials: false};
 
 	constructor(private http:HttpClient) {}
 

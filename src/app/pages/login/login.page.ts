@@ -5,7 +5,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthConstants } from '../../config/auth-constants';
-
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.page.html',
@@ -17,11 +17,11 @@ export class LoginPage implements OnInit {
 		private router: Router, 
 		private authService: AuthService,
 		private storageService: StorageService,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private googlePlus: GooglePlus
 	) { }
 
 	public postData = {
-		// Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTQzMTQzNDMsImV4cCI6MTU5OTY3MTE0MywianRpIjoiNmRXNTcxQWw5dXdONThabHB6S0huMSIsInVzZXIiOnsibmFtZSI6ImZhcmlkMiIsImlkIjoxNn19.D2o_TukHPvgU_r10KK9S9V4UEwfWJbAkpDt8Ge1AKTg',
 		user_name: '',
 		password: ''
 	}
@@ -48,76 +48,24 @@ export class LoginPage implements OnInit {
 	}
 
 	openDashboard(){
-
 		this.router.navigate(['dashboard']);
 	}
 
-// 	login() {
-
-//         var data1 = 'user_name=' + encodeURIComponent(this.postData.user_name) +
-//                    '&password=' + encodeURIComponent(this.postData.password);
-
-//         var link = environment.apiUrl + 'auth/login';
-
-//         var headers = new Headers();
-//         headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
-//         let options = new RequestOptions({ headers: headers });
-
-//         if(this.username == ''){
-
-//           this.showToast('Enter username');
-
-//         }else if(this.password == ''){
-
-//           this.showToast('Enter password');
-
-//         }else{
-
-//           this.http.post(link, data1, options)
-//           .subscribe(data => {
-
-              
-
-
-//               if(data.json().error == true){
-
-//                 console.log(data.json().message);
-//               }else if(data.json().error == false){
-
-//                 this.showToast(data.json().message);
-//                 console.log(data.json());
-//                 this.navCtrl.setRoot(DashboardPage);
-//                 this.storage.set('token', data.json().token);
-//                 this.storage.set('user_name', data.json().user.name);
-//               }              
-              
-//           }, error => {
-//               console.log("Oooops!");
-//           });
-//         }
-                
-//   }
-
 	loginAction() {
-		//JSON.stringify
-		console.log('postData' + JSON.stringify(this.postData));
-		// this.router.navigate(['dashboard']);
-
 		if (this.validateInputs()) {
+			// console.log('postData' + JSON.stringify(this.postData));
 
-			// this.toastService.presentToast('entered'); //to this is ok
 			this.authService.login(this.postData).subscribe((res: any) => {
-
-				this.toastService.presentToast('res');// + JSON.stringify(res));
-				this.openDashboard();
+				console.log('postData' + JSON.stringify(this.postData));
+				console.log('res' + JSON.stringify(res));
 				
-				// if (res.user) {
-				// 	// this.storageService.store(AuthConstants.AUTH, res.userData);
-				// 	this.openDashboard();
-				// }
-				// else {
-				// 	this.toastService.presentToast('Incorrect username or password');
-				// }
+				if (res.user) {
+					this.storageService.store(AuthConstants.AUTH, res.userData);
+					this.openDashboard();
+				}
+				else {
+					this.toastService.presentToast('Incorrect username or password');
+				}
 			}),
 			(error: any) => {
 				this.toastService.presentToast('Connection Error');
@@ -128,6 +76,17 @@ export class LoginPage implements OnInit {
 		}
 	}
 
+
+	googleLogin() {
+		console.log("google buttone clicked");
+		this.googlePlus.login({})
+			.then(res => {
+				console.log(res);
+				this.toastService.presentToast(JSON.stringify(res));
+				this.openDashboard();
+			})
+			.catch(err => console.error(err));
+	}
 
 	ngOnInit() {
 	}

@@ -17,7 +17,7 @@ export class AuthService {
 	) { }
 
 	login(postData: any): Observable<any> {
-		console.log("auth data: " + JSON.stringify(postData));
+		// console.log("auth data: " + JSON.stringify(postData));
 		return this.httpService.post('auth/student-login', postData);
 	}
 	
