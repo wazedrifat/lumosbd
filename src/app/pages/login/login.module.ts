@@ -1,3 +1,4 @@
+import { Facebook } from '@ionic-native/facebook/ngx';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,6 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     LoginPageRoutingModule
   ],
   declarations: [LoginPage],
-  providers: [GooglePlus]
+  providers: [GooglePlus, Facebook]
 })
 export class LoginPageModule {}

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthConstants } from '../../config/auth-constants';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.page.html',
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
 		private authService: AuthService,
 		private storageService: StorageService,
 		private toastService: ToastService,
-		private googlePlus: GooglePlus
+		private googlePlus: GooglePlus,
+		private fb:Facebook
 	) { }
 
 	public postData = {
@@ -76,6 +78,17 @@ export class LoginPage implements OnInit {
 		}
 	}
 
+	facebookLogin() {
+		this.fb.login(['public_profile', 'email'])
+			.then((res: FacebookLoginResponse) => {
+				console.log('Logged into Facebook!', res);
+				this.toastService.presentToast(JSON.stringify(res));
+			})
+			.catch(e => console.log('Error logging into Facebook', e));
+
+
+		this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+	}
 
 	googleLogin() {
 		console.log("google buttone clicked");
