@@ -39,12 +39,12 @@ export class LoginPage implements OnInit {
 	}
 
 	validateInputs() {
-		let username = this.postData.user_name.trim();
+		let user_name = this.postData.user_name.trim();
 		let password = this.postData.password.trim();
 		return (
 			this.postData.user_name &&
 			this.postData.password &&
-			username.length > 0 &&
+			user_name.length > 0 &&
 			password.length > 0
 		);
 	}
@@ -60,13 +60,14 @@ export class LoginPage implements OnInit {
 			this.authService.login(this.postData).subscribe((res: any) => {
 				console.log('postData' + JSON.stringify(this.postData));
 				console.log('res' + JSON.stringify(res));
+				this.toastService.presentToast('res' + JSON.stringify(res));
 				
 				if (res.user) {
 					this.storageService.store(AuthConstants.AUTH, res.userData);
 					this.openDashboard();
 				}
 				else {
-					this.toastService.presentToast('Incorrect username or password');
+					this.toastService.presentToast('Incorrect user_name or password');
 				}
 			}),
 			(error: any) => {
@@ -79,10 +80,29 @@ export class LoginPage implements OnInit {
 	}
 
 	facebookLogin() {
+		this.fb.logout();
 		this.fb.login(['public_profile', 'email'])
 			.then((res: FacebookLoginResponse) => {
+				this.storageService.store(AuthConstants.AUTH, res['accessToken']);
+
+				this.fb.api('me?fields=id,name, email,first_name,last_name', []).then(profile => {
+					console.log('profile = ', JSON.stringify(profile));
+					let userData = {
+						bmdc_no: '',
+						group_id: '',
+						username: profile['name'],
+						name: profile['first_name'] + ' ' + profile['last_name'],
+						mobile: '',
+						alt_mobile: '',
+						email: profile['email'],
+						address: '',
+						password: ''
+					};
+					this.router.navigate(['register', userData]);
+				});
+
 				console.log('Logged into Facebook!', res);
-				this.toastService.presentToast(JSON.stringify(res));
+				this.toastService.presentToast('res : ' + JSON.stringify(res));
 			})
 			.catch(e => console.log('Error logging into Facebook', e));
 
@@ -92,11 +112,27 @@ export class LoginPage implements OnInit {
 
 	googleLogin() {
 		console.log("google buttone clicked");
+		// this.googlePlus.logout();
 		this.googlePlus.login({})
 			.then(res => {
+				this.storageService.store(AuthConstants.AUTH, res['accessToken']);
+
+				let userData = {
+					bmdc_no: '',
+					group_id: '',
+					username: res['givenName'] + '_' + res['familyName'],
+					name: res['givenName'] + ' ' + res['familyName'],
+					mobile: '',
+					alt_mobile: '',
+					email: res['email'],
+					address: '',
+					password: ''
+				}
+
 				console.log(res);
 				this.toastService.presentToast(JSON.stringify(res));
 				this.openDashboard();
+				this.router.navigate(['register', userData]);
 			})
 			.catch(err => console.error(err));
 	}

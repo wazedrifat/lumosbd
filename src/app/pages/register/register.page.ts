@@ -1,15 +1,59 @@
+import { ToastService } from './../../services/toast.service';
+import { StorageService } from './../../services/storage.service';
+import { AuthService } from './../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+	selector: 'app-register',
+	templateUrl: './register.page.html',
+	styleUrls: ['./register.page.scss'],
 })
+
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+	public userData = {
+		bmdc_no: '',
+		group_id: '',
+		username: '',
+		name: '',
+		mobile: '',
+		alt_mobile: '',
+		email: '',
+		address: '',
+		password: ''
+	}
 
-  ngOnInit() {
-  }
+	constructor(
+		private router: Router,
+		private route: ActivatedRoute, 
+		private authService: AuthService,
+		private storageService: StorageService,
+		private toastService: ToastService,
+	) {
+		this.route.params.subscribe(params => {
+			console.log(JSON.stringify(params));
+			this.userData['username'] = params['username'];
+			this.userData['name'] = params['name'];
+			this.userData['mobile'] = params['mobile'];
+			this.userData['alt_mobile'] = params['alt_mobile'];
+			this.userData['email'] = params['email'];
+			this.userData['address'] = params['address'];
+		})
+	}
+
+	
+
+	submit() {
+		console.log("registration sumitted ", JSON.stringify(this.userData));
+
+		this.authService.signup(this.userData).subscribe((res:any) => {
+			console.log('userData' + JSON.stringify(this.userData));
+			console.log('res' + JSON.stringify(res));
+		})
+	}
+
+	ngOnInit() {
+	}
 
 }

@@ -22,7 +22,7 @@ export class AuthService {
 	}
 	
 	signup(postData: any): Observable<any> {
-		return this.httpService.post('signup', postData);
+		return this.httpService.post('registration/student-registration', postData);
 	}
 	
 	logout() {
