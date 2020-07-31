@@ -1,6 +1,6 @@
 import { environment } from './../../../environments/environment.prod';
 import { ToastService } from './../../services/toast.service';
-import { StorageService } from './../../services/storage.service';
+// import { StorageService } from './../../services/storage.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
 	constructor(
 		private router: Router, 
 		private authService: AuthService,
-		private storageService: StorageService,
+		// private storageService: StorageService,
 		private toastService: ToastService,
 		private googlePlus: GooglePlus,
 		private fb:Facebook
@@ -29,7 +29,6 @@ export class LoginPage implements OnInit {
 	}
 	
 	openForgotPassowrdPage(){
-
 		this.router.navigate(['forgot-password']);
 	}
 
@@ -63,7 +62,7 @@ export class LoginPage implements OnInit {
 				this.toastService.presentToast('res' + JSON.stringify(res));
 				
 				if (res.user) {
-					this.storageService.store(AuthConstants.AUTH, res.userData);
+					// this.storageService.store(AuthConstants.AUTH, res.userData);
 					this.openDashboard();
 				}
 				else {
@@ -83,7 +82,7 @@ export class LoginPage implements OnInit {
 		this.fb.logout();
 		this.fb.login(['public_profile', 'email'])
 			.then((res: FacebookLoginResponse) => {
-				this.storageService.store(AuthConstants.AUTH, res['accessToken']);
+				// this.storageService.store(AuthConstants.AUTH, res['accessToken']);
 
 				this.fb.api('me?fields=id,name, email,first_name,last_name', []).then(profile => {
 					console.log('profile = ', JSON.stringify(profile));
@@ -115,7 +114,7 @@ export class LoginPage implements OnInit {
 		// this.googlePlus.logout();
 		this.googlePlus.login({})
 			.then(res => {
-				this.storageService.store(AuthConstants.AUTH, res['accessToken']);
+				// this.storageService.store(AuthConstants.AUTH, res['accessToken']);
 
 				let userData = {
 					bmdc_no: '',

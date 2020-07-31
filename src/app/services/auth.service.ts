@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/';
 import { HttpService } from './http.service';
-import { StorageService } from './storage.service';
+// import { StorageService } from './storage.service';
 import { AuthConstants } from './../config/auth-constants'
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AuthService {
 
 	constructor(
 		private httpService: HttpService,
-		private storageService: StorageService,
+		// private storageService: StorageService,
 		private router: Router
 	) { }
 
@@ -24,9 +24,13 @@ export class AuthService {
 	signup(postData: any): Observable<any> {
 		return this.httpService.post('registration/student-registration', postData);
 	}
+
+	forgotPassword(postData:any): Observable<any> {
+		return this.httpService.post('auth/forget-password', postData);
+	}
 	
 	logout() {
-		this.storageService.clear();
+		// this.storageService.clear();
 		// this.storageService.removeStorageItem(AuthConstants.AUTH).then(res => {
 		// 	this.router.navigate(['/login']); 	
 		// });

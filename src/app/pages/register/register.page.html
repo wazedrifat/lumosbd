@@ -48,7 +48,18 @@
                       <div class="input_div">
                           <label for="">Phone Number</label>
                           <input type="text" class="form-control" [(ngModel)]="userData.mobile" placeholder="01728013015" />
-                      </div>
+					  </div>
+					  <div class="input_div">
+						<ion-item>
+							<ion-label>Group id</ion-label>
+							<ion-select placeholder="Select One" [(ngModel)]="userData.group_id" >
+							  <ion-select-option value="19">Basic Science</ion-select-option>
+							  <ion-select-option value="22">MD</ion-select-option>
+							  <ion-select-option value="23">MS</ion-select-option>
+							  <ion-select-option value="24">Diploma</ion-select-option>
+							</ion-select>
+						  </ion-item>
+					  </div>
                       <div class="input_div">
                           <label for="">BMDC</label>
                           <input type="text" class="form-control" [(ngModel)]="userData.bmdc_no" placeholder="1" />

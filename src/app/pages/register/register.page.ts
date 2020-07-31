@@ -1,5 +1,5 @@
 import { ToastService } from './../../services/toast.service';
-import { StorageService } from './../../services/storage.service';
+// import { StorageService } from './../../services/storage.service';
 import { AuthService } from './../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +14,7 @@ export class RegisterPage implements OnInit {
 
 	public userData = {
 		bmdc_no: '',
-		group_id: '',
+		group_id: '19',
 		username: '',
 		name: '',
 		mobile: '',
@@ -28,18 +28,21 @@ export class RegisterPage implements OnInit {
 		private router: Router,
 		private route: ActivatedRoute, 
 		private authService: AuthService,
-		private storageService: StorageService,
+		// private storageService: StorageService,
 		private toastService: ToastService,
 	) {
 		this.route.params.subscribe(params => {
 			console.log(JSON.stringify(params));
-			this.userData['username'] = params['username'];
+			this.userData['username'] = params['name'];
 			this.userData['name'] = params['name'];
 			this.userData['mobile'] = params['mobile'];
 			this.userData['alt_mobile'] = params['alt_mobile'];
 			this.userData['email'] = params['email'];
 			this.userData['address'] = params['address'];
-		})
+		}),
+		(error: any) => {
+			this.toastService.presentToast('Information is invalid or already exists');
+		}
 	}
 
 	
