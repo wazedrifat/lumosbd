@@ -1,10 +1,10 @@
+import { AuthConstants } from './../../config/auth-constants';
+import { Storage } from '@ionic/storage';
 import { environment } from './../../../environments/environment.prod';
 import { ToastService } from './../../services/toast.service';
-// import { StorageService } from './../../services/storage.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthConstants } from '../../config/auth-constants';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 @Component({
@@ -17,11 +17,13 @@ export class LoginPage implements OnInit {
 	constructor(
 		private router: Router, 
 		private authService: AuthService,
-		// private storageService: StorageService,
+		private storage: Storage,
 		private toastService: ToastService,
 		private googlePlus: GooglePlus,
 		private fb:Facebook
-	) { }
+	) {
+		this.authService.logout();
+	}
 
 	public postData = {
 		user_name: '',
@@ -59,10 +61,12 @@ export class LoginPage implements OnInit {
 			this.authService.login(this.postData).subscribe((res: any) => {
 				console.log('postData' + JSON.stringify(this.postData));
 				console.log('res' + JSON.stringify(res));
-				this.toastService.presentToast('res' + JSON.stringify(res));
+				// this.toastService.presentToast('res' + JSON.stringify(res));
 				
 				if (res.user) {
-					// this.storageService.store(AuthConstants.AUTH, res.userData);
+					this.storage.set(AuthConstants.token, 'Bearer ' + res['token']);
+					AuthConstants.savedToken = 'Bearer ' + res['token'];
+					this.storage.set(AuthConstants.userData, res['user']);
 					this.openDashboard();
 				}
 				else {
@@ -79,7 +83,6 @@ export class LoginPage implements OnInit {
 	}
 
 	facebookLogin() {
-		this.fb.logout();
 		this.fb.login(['public_profile', 'email'])
 			.then((res: FacebookLoginResponse) => {
 				// this.storageService.store(AuthConstants.AUTH, res['accessToken']);
@@ -101,7 +104,7 @@ export class LoginPage implements OnInit {
 				});
 
 				console.log('Logged into Facebook!', res);
-				this.toastService.presentToast('res : ' + JSON.stringify(res));
+				// this.toastService.presentToast('res : ' + JSON.stringify(res));
 			})
 			.catch(e => console.log('Error logging into Facebook', e));
 
@@ -129,7 +132,7 @@ export class LoginPage implements OnInit {
 				}
 
 				console.log(res);
-				this.toastService.presentToast(JSON.stringify(res));
+				// this.toastService.presentToast(JSON.stringify(res));
 				this.openDashboard();
 				this.router.navigate(['register', userData]);
 			})

@@ -1,9 +1,9 @@
+import { storage } from 'firebase';
+import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/';
 import { HttpService } from './http.service';
-// import { StorageService } from './storage.service';
-import { AuthConstants } from './../config/auth-constants'
 
 @Injectable({
 	providedIn: 'root'
@@ -12,7 +12,7 @@ export class AuthService {
 
 	constructor(
 		private httpService: HttpService,
-		// private storageService: StorageService,
+		private storage: Storage,
 		private router: Router
 	) { }
 
@@ -30,9 +30,12 @@ export class AuthService {
 	}
 	
 	logout() {
-		// this.storageService.clear();
-		// this.storageService.removeStorageItem(AuthConstants.AUTH).then(res => {
-		// 	this.router.navigate(['/login']); 	
-		// });
-	} 	
+		let ret = this.httpService.post('auth/student-logout', null);
+		this.storage.clear();
+		return ret;
+	} 
+
+	getLeaderBoardList() {
+		return this.httpService.get('dashboard/get-leaderboard-list');
+	}
 }
