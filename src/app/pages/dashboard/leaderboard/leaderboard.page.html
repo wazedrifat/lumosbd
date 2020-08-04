@@ -25,17 +25,22 @@
         <h4>Leaderboard</h4>
       </div>
      <div class="sub_category">
-		<ion-content color="light">
 			<ion-grid>
-				<ion-row>
-					<ion-col> rank </ion-col>
-					<ion-col> name </ion-col>
-					<ion-col> student_id </ion-col>
-					<ion-col> exam_given </ion-col>
-					<ion-col> points </ion-col>
+				<ion-row >
+					<ion-col size="auto"><h5>Rank</h5></ion-col>
+					<ion-col size="auto"><h5>Name</h5></ion-col>
+					<ion-col size="auto"><h5>ID</h5></ion-col>
+					<ion-col size="auto"><h5>Exams</h5></ion-col>
+					<ion-col size="auto"><h5>Points</h5></ion-col>
+				</ion-row>
+				<ion-row *ngFor="let item of dataList">
+					<ion-col size="auto">{{item.rank}}</ion-col>
+					<ion-col size="auto">{{item.name}}</ion-col>
+					<ion-col size="auto">{{item.student_id}}</ion-col>
+					<ion-col size="auto">{{item.exam_given}}</ion-col>
+					<ion-col size="auto">{{item.points}}</ion-col>
 				</ion-row>
 			</ion-grid>
-		</ion-content>
      </div>
     </div>
 
